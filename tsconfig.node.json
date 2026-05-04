@@ -6,6 +6,10 @@
     "module": "esnext",
     "types": ["node"],
     "skipLibCheck": true,
+    "paths": {
+      "main/*": ["./src/main/*"],
+      "common/*": ["./src/common/*"],
+    }, 
 
     /* Bundler mode */
     "moduleResolution": "bundler",
