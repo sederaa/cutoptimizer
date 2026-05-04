@@ -1,0 +1,17 @@
+{
+    "Entities": {
+        "ListItem": {
+            "Name": {
+                "Maxlength": 50
+            },
+            "Length": {
+                "Min": 1,
+                "Max": 9007199254740991
+            },
+            "Quantity": {
+                "Min": 1,
+                "Max": 999
+            }
+        }
+    }
+}
