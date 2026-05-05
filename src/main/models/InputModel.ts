@@ -23,7 +23,7 @@ export interface InputModelValidationErrors {
 
 export const nameofInputModel = nameofFactory<InputModel>();
 
-export const InputModelValidationSchema: yup.SchemaOf<InputModel> = yup.object().shape({
+export const InputModelValidationSchema: yup.Schema<InputModel> = yup.object().shape({
     kerf: yup.number().typeError("must be number").required("is required"),
     cuts: yup
         .array()

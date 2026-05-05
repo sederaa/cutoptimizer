@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
 import { Section } from "main/components/Section";
 import type { StockModel } from "main/models/StockModel";
@@ -149,6 +149,8 @@ const Kerf = styled.div<KerfProps>`
 
 const Key = () => {
     const theme = useContext(ThemeContext);
+    const borderColor = theme?.colors.border ?? "dimgray";
+
     return (
         <ul style={{ flex: 1, listStyleType: "none", display: "flex" }}>
             <li style={{ marginRight: "1em" }}>
@@ -172,7 +174,7 @@ const Key = () => {
                         display: "inline-block",
                         height: "1em",
                         width: "1em",
-                        background: `repeating-linear-gradient(-45deg,grey,grey 6px,${theme.colors.border} 6px,${theme.colors.border} 12px)`,
+                        background: `repeating-linear-gradient(-45deg,grey,grey 6px,${borderColor} 6px,${borderColor} 12px)`,
                         padding: 0,
                         marginRight: "0.5em",
                         borderRadius: "3px",

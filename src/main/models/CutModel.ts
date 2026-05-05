@@ -11,7 +11,7 @@ export interface CutModel {
 
 export const nameofCutModel = nameofFactory<CutModel>();
 
-export const CutModelValidationSchema: yup.SchemaOf<CutModel> = yup.object().shape({
+export const CutModelValidationSchema: yup.Schema<CutModel> = yup.object().shape({
     id: yup.number().typeError("must be number").required("is required"),
     instanceId: yup.number().typeError("must be number").optional(),
     length: yup.number().typeError("must be number").required("is required"),

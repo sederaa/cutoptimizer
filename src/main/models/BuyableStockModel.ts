@@ -10,7 +10,7 @@ export class BuyableStockModel {
 
 export const nameofBuyableStockModel = nameofFactory<BuyableStockModel>();
 
-export const BuyableStockModelValidationSchema: yup.SchemaOf<BuyableStockModel> = yup.object().shape({
+export const BuyableStockModelValidationSchema: yup.Schema<BuyableStockModel> = yup.object().shape({
     id: yup.number().typeError("must be number").required("is required"),
     //instanceId: yup.number().typeError("must be number").required("is required"),
     length: yup.number().typeError("must be number").required("is required"),
