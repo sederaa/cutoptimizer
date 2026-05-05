@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
 import { Section } from "main/components/Section";
-import { StockModel } from "main/models/StockModel";
-import { CutModel } from "main/models/CutModel";
+import type { StockModel } from "main/models/StockModel";
+import type { CutModel } from "main/models/CutModel";
 import { Heading } from "common/components/Heading";
 
 const StyledCutList = styled(Section)`

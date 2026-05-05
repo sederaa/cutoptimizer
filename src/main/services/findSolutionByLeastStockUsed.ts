@@ -1,5 +1,5 @@
-import { Node } from "main/services/createSolutionsTree";
-import { StockModel } from "main/models/StockModel";
+import type { Node } from "main/services/createSolutionsTree";
+import type { StockModel } from "main/models/StockModel";
 
 const getNodeLineage = (node: Node): Node[] => {
     if (node.parent === undefined || node.parent.stock === undefined || node.parent.cut === undefined) return [node];

@@ -1,5 +1,5 @@
 import { Machine } from "xstate";
-import { ListItemModel, makeEmptyListItemData, nameofListItemModel } from "common/models/ListItemModel";
+import { type ListItemModel, makeEmptyListItemData, nameofListItemModel } from "common/models/ListItemModel";
 
 export enum ListStates {
     Idle = "Idle",

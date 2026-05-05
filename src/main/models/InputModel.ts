@@ -1,6 +1,6 @@
-import { BuyableStockModel, BuyableStockModelValidationSchema } from "main/models/BuyableStockModel";
-import { StockModel, StockModelValidationSchema } from "main/models/StockModel";
-import { CutModel, CutModelValidationSchema } from "main/models/CutModel";
+import { type BuyableStockModel, BuyableStockModelValidationSchema } from "main/models/BuyableStockModel";
+import { type StockModel, StockModelValidationSchema } from "main/models/StockModel";
+import { type CutModel, CutModelValidationSchema } from "main/models/CutModel";
 import * as yup from "yup";
 import { nameofFactory } from "common/utilities/nameofFactory";
 

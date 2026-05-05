@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { List } from "common/components/List";
-import { ListItemModel } from "common/models/ListItemModel";
-import { StockModel } from "main/models/StockModel";
-import { ModelErrorsArray } from "main/models/InputModel";
+import type { ListItemModel } from "common/models/ListItemModel";
+import type { StockModel } from "main/models/StockModel";
+import type { ModelErrorsArray } from "main/models/InputModel";
 import { Heading } from "common/components/Heading";
 import { Section } from "main/components/Section";
 

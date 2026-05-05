@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { useMachine } from "@xstate/react";
-import { ListMachine, ListEvents, UpdateFieldEvent, AddEvent, DeleteEvent } from "common/components/ListMachine";
-import { ListItemModel } from "common/models/ListItemModel";
+import { ListMachine, ListEvents, type UpdateFieldEvent, type AddEvent, type DeleteEvent } from "common/components/ListMachine";
+import type { ListItemModel } from "common/models/ListItemModel";
 import { IntegerField } from "common/components/IntegerField";
 import { Field } from "common/components/Field";
 import constants from "constants.json";

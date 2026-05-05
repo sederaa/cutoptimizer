@@ -7,11 +7,10 @@ import { Footer } from "main/components/Footer";
 import { InputSection } from "main/components/InputSection";
 import { CutList } from "main/components/CutList";
 import { ThemeProvider } from "styled-components";
-//import { BuyableStockModel } from "main/models/BuyableStockModel";
-import { StockModel } from "main/models/StockModel";
-import { CutModel } from "main/models/CutModel";
+import type { StockModel } from "main/models/StockModel";
+import type { CutModel } from "main/models/CutModel";
 import { useMachine } from "@xstate/react";
-import { AppMachine, AppMachineEvents, SetKerfEvent, SetCutsEvent, SetStockEvent } from "main/machines/AppMachine";
+import { AppMachine, AppMachineEvents, type SetKerfEvent, type SetCutsEvent, type SetStockEvent } from "main/machines/AppMachine";
 
 const theme = {
     colors: {

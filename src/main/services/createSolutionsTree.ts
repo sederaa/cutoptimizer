@@ -1,6 +1,6 @@
-import { CutModel } from "../models/CutModel";
-import { StockModel } from "../models/StockModel";
-import { BuyableStockModel } from "../models/BuyableStockModel";
+import type { CutModel } from "../models/CutModel";
+import type { StockModel } from "../models/StockModel";
+import type { BuyableStockModel } from "../models/BuyableStockModel";
 import range from "lodash.range";
 
 export class Solution {

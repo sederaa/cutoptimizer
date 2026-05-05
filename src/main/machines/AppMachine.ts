@@ -1,12 +1,12 @@
 import { Machine, assign } from "xstate";
 import { createSolutionsTree } from "main/services/createSolutionsTree";
 import { printTree } from "main/services/printTree";
-import { BuyableStockModel } from "main/models/BuyableStockModel";
-import { StockModel } from "main/models/StockModel";
-import { CutModel } from "main/models/CutModel";
+import type { BuyableStockModel } from "main/models/BuyableStockModel";
+import type { StockModel } from "main/models/StockModel";
+import type { CutModel } from "main/models/CutModel";
 import set from "lodash.set";
 import { findSolutionByLeastStockUsed } from "main/services/findSolutionByLeastStockUsed";
-import { InputModel, InputModelValidationSchema, InputModelValidationErrors } from "main/models/InputModel";
+import { type InputModel, InputModelValidationSchema, type InputModelValidationErrors } from "main/models/InputModel";
 import * as yup from "yup";
 import { makeEmptyListItemData } from "common/models/ListItemModel";
 

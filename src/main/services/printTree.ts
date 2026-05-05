@@ -1,4 +1,4 @@
-import { Node } from "main/services/createSolutionsTree";
+import type { Node } from "main/services/createSolutionsTree";
 
 export const printTree = (node: Node, level: number) => {
     const indent = " ".repeat(level * 3);

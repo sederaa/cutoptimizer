@@ -1,4 +1,4 @@
-import { CutModel } from "main/models/CutModel";
+import type { CutModel } from "main/models/CutModel";
 import * as yup from "yup";
 import { nameofFactory } from "common/utilities/nameofFactory";
 
@@ -14,7 +14,7 @@ export interface StockModel {
 
 export const nameofStockModel = nameofFactory<StockModel>();
 
-export const StockModelValidationSchema: yup.SchemaOf<StockModel> = yup.object().shape({
+export const StockModelValidationSchema: yup.Schema<StockModel> = yup.object().shape({
     id: yup.number().typeError("must be number").required("is required"),
     instanceId: yup.number().typeError("must be number").required("is required"),
     length: yup.number().typeError("must be number").required("is required"),
