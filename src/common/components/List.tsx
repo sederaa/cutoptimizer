@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { useMachine } from "@xstate/react";
 import { ListMachine, ListEvents, type UpdateFieldEvent, type AddEvent, type DeleteEvent } from "common/components/ListMachine";

@@ -3,10 +3,10 @@ import { nameofFactory } from "common/utilities/nameofFactory";
 
 export interface CutModel {
     id: number;
-    instanceId: number | undefined;
+    instanceId?: number;
     length: number;
     quantity: number | null;
-    name: string | undefined;
+    name?: string;
 }
 
 export const nameofCutModel = nameofFactory<CutModel>();
