@@ -1,4 +1,3 @@
-import React from "react";
 import type { InputModelValidationErrors } from "main/models/InputModel";
 import { Cuts } from "main/components/Cuts";
 import { Stock } from "main/components/Stock";

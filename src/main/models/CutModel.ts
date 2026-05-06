@@ -1,12 +1,13 @@
 import * as yup from "yup";
 import { nameofFactory } from "common/utilities/nameofFactory";
+import type { ListItemModel } from "common/models/ListItemModel";
 
-export interface CutModel {
+export interface CutModel extends ListItemModel{
     id: number;
     instanceId?: number;
     length: number;
     quantity: number | null;
-    name?: string;
+    name: string;
 }
 
 export const nameofCutModel = nameofFactory<CutModel>();
@@ -16,5 +17,5 @@ export const CutModelValidationSchema: yup.Schema<CutModel> = yup.object().shape
     instanceId: yup.number().typeError("must be number").optional(),
     length: yup.number().typeError("must be number").required("is required"),
     quantity: yup.number().typeError("must be number").required("is required"),
-    name: yup.string().typeError("must be string").optional(),
+    name: yup.string().typeError("must be string").required("is required"),
 });

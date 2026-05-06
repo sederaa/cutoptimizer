@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { IntegerInput } from "common/components/IntegerInput";
 import { Heading } from "common/components/Heading";

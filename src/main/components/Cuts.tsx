@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { List } from "common/components/List";
 import type { ListItemModel } from "common/models/ListItemModel";
