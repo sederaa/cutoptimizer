@@ -51,7 +51,7 @@ export const createSolutionsTree = (
     var cutInstanceIdMaker = idMaker();
 
     let expandedCuts = cuts.flatMap((c) =>
-        range(1, (c.quantity ?? 1) + 1).map((i) => ({
+        range(1, (c.quantity ?? 1) + 1).map(() => ({
             ...c,
             id: c.id,
             instanceId: cutInstanceIdMaker.next().value as number,

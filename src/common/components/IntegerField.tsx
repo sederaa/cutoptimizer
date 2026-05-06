@@ -21,6 +21,8 @@ export const IntegerField = ({ id, name, value, min, max, label, error, onChange
                 id={id}
                 name={name}
                 value={value}
+                min={min}
+                max={max}
                 hasError={error !== undefined}
                 onChange={onChange}
                 onBlur={onBlur}

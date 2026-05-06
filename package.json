@@ -20,6 +20,7 @@
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "styled-components": "^6.4.1",
+    "temporal-polyfill": "^0.3.2",
     "xstate": "^5.31.0",
     "yup": "^1.7.1"
   },

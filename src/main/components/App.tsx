@@ -1,6 +1,3 @@
-import "sanitize.css";
-import "sanitize.css/forms.css";
-import "sanitize.css/typography.css";
 import { Header } from "main/components/Header";
 import { Footer } from "main/components/Footer";
 import { InputSection } from "main/components/InputSection";
