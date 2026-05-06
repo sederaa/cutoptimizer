@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useMachine } from "@xstate/react";
-import { ListMachine, ListEvents, type UpdateFieldEvent, type AddEvent, type DeleteEvent } from "common/components/ListMachine";
+import { ListMachine, type UpdateFieldEvent, type AddEvent, type DeleteEvent } from "common/components/ListMachine";
 import type { ListItemModel } from "common/models/ListItemModel";
 import { IntegerField } from "common/components/IntegerField";
 import { Field } from "common/components/Field";
@@ -15,20 +15,20 @@ interface ListProps {
 }
 
 export const List = ({ items, onItemsChanged, errors }: ListProps) => {
-    const [, sendEvent] = useMachine(ListMachine, { context: { onItemsChanged } });
+    const [, sendEvent] = useMachine(ListMachine, { input: { onItemsChanged } });
     //console.debug(`state.context.items = `, state.context.items);
 
     const handleAddClick = () => {
-        sendEvent({ type: ListEvents.Add, items } as AddEvent);
+        sendEvent({ type: "Add", items } as AddEvent);
     };
 
     const handleDeleteItem = (id: number) => {
-        sendEvent({ type: ListEvents.Delete, items, id } as DeleteEvent);
+        sendEvent({ type: "Delete", items, id } as DeleteEvent);
     };
 
     const handleUpdateField = (id: number, name: keyof Omit<ListItemModel, "id">, value: string) => {
         sendEvent({
-            type: ListEvents.UpdateField,
+            type: "UpdateField",
             id,
             name,
             value,

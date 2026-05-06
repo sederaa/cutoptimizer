@@ -9,7 +9,7 @@ import { ThemeProvider } from "styled-components";
 import type { StockModel } from "main/models/StockModel";
 import type { CutModel } from "main/models/CutModel";
 import { useMachine } from "@xstate/react";
-import { AppMachine, AppMachineEvents, type SetKerfEvent, type SetCutsEvent, type SetStockEvent } from "main/machines/AppMachine";
+import { AppMachine, type SetKerfEvent, type SetCutsEvent, type SetStockEvent } from "main/machines/AppMachine";
 
 const theme = {
     colors: {
@@ -32,17 +32,17 @@ const App = () => {
     //console.debug(`App: machineState.context.input = `, machineState.context.input);
 
     const handleKerfChanged = (kerf: number) => {
-        sendMachineEvent({ type: AppMachineEvents.SetKerf, kerf } as SetKerfEvent);
+        sendMachineEvent({ type: "SetKerf", kerf } as SetKerfEvent);
     };
 
     const handleCutsChanged = (cuts: CutModel[]) => {
         //console.debug(`App: handleCutsChanged: cuts = `, cuts);
-        sendMachineEvent({ type: AppMachineEvents.SetCuts, cuts } as SetCutsEvent);
+        sendMachineEvent({ type: "SetCuts", cuts } as SetCutsEvent);
     };
 
     const handleStockChanged = (stock: StockModel[]) => {
         //console.debug(`App: handleStockChanged: stock = `, stock);
-        sendMachineEvent({ type: AppMachineEvents.SetStock, stock } as SetStockEvent);
+        sendMachineEvent({ type: "SetStock", stock } as SetStockEvent);
     };
 
     return (

@@ -1,4 +1,4 @@
-import { Machine, assign } from "xstate";
+import { setup, assign, fromPromise } from "xstate";
 import { createSolutionsTree } from "main/services/createSolutionsTree";
 import { printTree } from "main/services/printTree";
 import type { BuyableStockModel } from "main/models/BuyableStockModel";
@@ -16,32 +16,25 @@ interface AppMachineContext {
     solution?: StockModel[];
 }
 
-export enum AppMachineStates {
-    Standby = "Standby",
-    Validating = "Validating",
-    Calculating = "Calculating",
-}
-
-interface AppMachineSchema {
-    states: {
-        [AppMachineStates.Standby]: {};
-        [AppMachineStates.Validating]: {};
-        [AppMachineStates.Calculating]: {};
-    };
-}
-
-export enum AppMachineEvents {
-    SetKerf = "SetKerf",
-    SetCuts = "SetCuts",
-    SetStock = "SetStock",
-}
-export type SetKerfEvent = { type: AppMachineEvents.SetKerf; kerf: number };
-export type SetCutsEvent = { type: AppMachineEvents.SetCuts; cuts: CutModel[] };
-export type SetStockEvent = { type: AppMachineEvents.SetStock; stock: StockModel[] };
+export type SetKerfEvent = { type: "SetKerf"; kerf: number };
+export type SetCutsEvent = { type: "SetCuts"; cuts: CutModel[] };
+export type SetStockEvent = { type: "SetStock"; stock: StockModel[] };
 type AppMachineEvent = SetKerfEvent | SetCutsEvent | SetStockEvent;
 
-export const AppMachine = Machine<AppMachineContext, AppMachineSchema, AppMachineEvent>({
-    initial: AppMachineStates.Standby,
+export const AppMachine = setup({
+    types: {} as {
+        context: AppMachineContext;
+        events: AppMachineEvent;
+    },
+    actions: {},
+    guards: {},
+    actors: {
+        validateInput: fromPromise(async ({ input }: { input: InputModel }) =>
+            InputModelValidationSchema.validate(input, { abortEarly: false })
+        ),
+    },
+}).createMachine({
+    initial: "Standby",
     context: {
         input: {
             cuts: [makeEmptyListItemData(0)] as CutModel[],
@@ -64,53 +57,54 @@ export const AppMachine = Machine<AppMachineContext, AppMachineSchema, AppMachin
         },
     },
     states: {
-        [AppMachineStates.Standby]: {
+        Standby: {
             on: {
-                [AppMachineEvents.SetKerf]: {
+                SetKerf: {
                     actions: assign({
-                        input: (context, event: SetKerfEvent) => ({ ...context.input, kerf: event.kerf }),
-                        solution: (c) => undefined,
+                        input: ({ context, event /*: SetKerfEvent*/ }) => ({ ...context.input, kerf: event.kerf }),
+                        solution: () => undefined,
                     }),
-                    target: AppMachineStates.Validating,
+                    target: "Validating",
                 },
-                [AppMachineEvents.SetCuts]: {
+                SetCuts: {
                     actions: assign({
-                        input: (context, event: SetCutsEvent) => ({ ...context.input, cuts: event.cuts }),
-                        solution: (c) => undefined,
+                        input: ({ context, event /*: SetCutsEvent*/ }) => ({ ...context.input, cuts: event.cuts }),
+                        solution: () => undefined,
                     }),
-                    target: AppMachineStates.Validating,
+                    target: "Validating",
                 },
-                [AppMachineEvents.SetStock]: {
+                SetStock: {
                     actions: assign({
-                        input: (context, event: SetStockEvent) => ({
+                        input: ({ context, event /*: SetStockEvent*/ }) => ({
                             ...context.input,
                             stocks: event.stock,
                         }),
-                        solution: (c) => undefined,
+                        solution: () => undefined,
                     }),
-                    target: AppMachineStates.Validating,
+                    target: "Validating",
                 },
             },
         },
-        [AppMachineStates.Validating]: {
+        Validating: {
             invoke: {
-                src: (context) => InputModelValidationSchema.validate(context.input, { abortEarly: false }),
+                src: "validateInput",
+                input: ({ context }) => context.input,
                 onDone: {
-                    target: AppMachineStates.Calculating,
+                    target: "Calculating",
                     actions: [
-                        //(context, event) => console.debug(`Validating: onDone: event = `, event),
+                        //({ context, event }) => console.debug(`Validating: onDone: event = `, event),
                         assign({
-                            errors: (context, event) => undefined,
+                            errors: () => undefined,
                         }),
                     ],
                 },
                 onError: {
-                    target: AppMachineStates.Standby,
+                    target: "Standby",
                     actions: [
-                        //(context, event) => console.debug(`Validating: onError: event = `, event),
+                        //({ context, event }) => console.debug(`Validating: onError: event = `, event),
                         assign({
-                            errors: (context, event) =>
-                                event.data.inner.reduce(
+                            errors: ({ event }) =>
+                                ((event.error as yup.ValidationError).inner ?? []).reduce(
                                     (accumulator: any, e: yup.ValidationError) =>
                                         set(accumulator, e.path ?? "general", e.message),
                                     {}
@@ -120,8 +114,8 @@ export const AppMachine = Machine<AppMachineContext, AppMachineSchema, AppMachin
                 },
             },
         },
-        [AppMachineStates.Calculating]: {
-            entry: assign((context) => {
+        Calculating: {
+            entry: assign(({ context }) => {
                 //console.debug(`AppMachineStates.Calculating: calling createSolutionsTree...`);
                 const treeRootNode = createSolutionsTree(
                     context.input.cuts,
@@ -133,7 +127,7 @@ export const AppMachine = Machine<AppMachineContext, AppMachineSchema, AppMachin
                 const stocks = findSolutionByLeastStockUsed(treeRootNode);
                 return { solution: stocks };
             }),
-            always: AppMachineStates.Standby,
+            always: "Standby",
         },
     },
 });
